@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#883284</color>
+
+    <!--  Cool Blues Background  -->
+    <color name="colorCoolBluesStart">#6dd5ed</color>
+    <color name="colorCoolBluesEnd">#2193b0</color>
+
+    <!-- General Colour Resources -->
+
+        <!-- White -->
+        <color name="colorWhite">#FFFFFF</color>
+
+            <!--With Transparency-->
+            <color name="colorWhite50Percent">#80FFFFFF</color>
+
+
+    <!-- General Colour Resources -->
+
+    <!-- Black -->
+    <color name="colorBlack">#000000</color>
+
+    <!--With Transparency-->
+    <color name="colorBlack10Percent">#1A000000</color>
+
+
+
+</resources>

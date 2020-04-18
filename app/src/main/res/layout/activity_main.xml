@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_cool_blues"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewResultantAcceleration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:text="1.0G"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewDivLine"
+        app:layout_constraintDimensionRatio="W,1:2"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewDivLine"
+        app:layout_constraintStart_toStartOf="@+id/imageViewDivLine" />
+
+    <ImageView
+        android:id="@+id/imageViewDivLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/colorWhite50Percent"
+        android:contentDescription="Dividing Line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/linearLayoutXAxis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutYAxis"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutYAxis"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageViewDivLine"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutYAxis"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintDimensionRatio="W,1:1">
+
+        <hr.johndoeveloper.rotationapp.RotationIndicator
+            app:arcSweepAngle="120"
+            android:id="@+id/rotationIndicatorXAxis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/textViewX"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="X"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/linearLayoutYAxis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayoutZAxis"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutXAxis"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDivLine"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintDimensionRatio="W,1:1">
+
+        <hr.johndoeveloper.rotationapp.RotationIndicator
+            app:arcSweepAngle="360"
+            android:id="@+id/rotationIndicatorYAxis"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/textViewY"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Y"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/linearLayoutZAxis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutYAxis"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewDivLine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutYAxis"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutYAxis"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintDimensionRatio="W,1:1">
+
+        <hr.johndoeveloper.rotationapp.RotationIndicator
+            android:id="@+id/rotationIndicatorZAxis"
+            app:arcSweepAngle="150"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/textViewZ"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="Z"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutXAxis"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutXAxis"
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutYAxis"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutYAxis"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutYAxis"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutZAxis"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutZAxis"
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/colorWhite"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
