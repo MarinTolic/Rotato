@@ -11,4 +11,18 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="rotationIndicatorsText">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="rotationIndicatorsReading">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

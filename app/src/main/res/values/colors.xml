@@ -10,11 +10,11 @@
 
     <!-- General Colour Resources -->
 
-        <!-- White -->
-        <color name="colorWhite">#FFFFFF</color>
+    <!-- White -->
+    <color name="colorWhite">#FFFFFF</color>
 
-            <!--With Transparency-->
-            <color name="colorWhite50Percent">#80FFFFFF</color>
+    <!--With Transparency-->
+    <color name="colorWhite50Percent">#80FFFFFF</color>
 
 
     <!-- General Colour Resources -->
