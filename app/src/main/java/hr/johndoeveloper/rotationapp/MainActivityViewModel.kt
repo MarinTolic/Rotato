@@ -1,5 +1,6 @@
 package hr.johndoeveloper.rotationapp
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import hr.johndoeveloper.rotationapp.common.calculateInG
@@ -9,7 +10,6 @@ import hr.johndoeveloper.rotationapp.model.AccelerometerLiveData
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.flow.onEach
 
 class MainActivityViewModel : ViewModel() {
 
@@ -21,7 +21,7 @@ class MainActivityViewModel : ViewModel() {
     @ExperimentalCoroutinesApi
     fun startAccelerometer() {
         Accelerometer.registerSensor()
-        collectAccelerationSensorFlow()
+        displayTextualReading()
         displaySweepAngle()
     }
 
@@ -31,27 +31,11 @@ class MainActivityViewModel : ViewModel() {
         coroutineJobSweepAngle.cancel()
     }
 
-    @ExperimentalCoroutinesApi
-    private fun collectAccelerationSensorFlow() {
-        coroutineJobAcceleration = viewModelScope.launch {
-            Accelerometer.interactiveFlowTwo.generateFlow
-                .onEach {
-                    delay(100)
-                }
-                .conflate()
-                .collect {
-                    updateAxesReadings(it)
-                    updateResultantAcceleration(it)
-                }
-        }
-    }
-
     private fun updateAxesReadings(axesReadings: FloatArray) {
         accelerometerLiveData.xAxis.postValue(axesReadings[0])
         accelerometerLiveData.yAxis.postValue(axesReadings[1])
         accelerometerLiveData.zAxis.postValue(axesReadings[2])
     }
-
 
     private fun updateResultantAcceleration(accelerationFloatArray: FloatArray) {
         accelerometerLiveData.resultantVector.postValue(
@@ -71,7 +55,7 @@ class MainActivityViewModel : ViewModel() {
     @ExperimentalCoroutinesApi
     private fun displaySweepAngle() {
         coroutineJobSweepAngle = viewModelScope.launch {
-            Accelerometer.interactiveFlow.generateFlow
+            Accelerometer.receiveFlow()
                 .collect {
                     accelerometerLiveData.sweepAngleX.postValue(
                         calculateSweepAngle(
@@ -90,6 +74,26 @@ class MainActivityViewModel : ViewModel() {
                     )
                 }
         }
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun displayTextualReading() {
+        coroutineJobAcceleration = viewModelScope.launch {
+            Accelerometer.receiveFlow()
+                .conflate()
+                .collect {
+                    updateAxesReadings(it)
+                    updateResultantAcceleration(it)
+                    delay(100)
+                }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    override fun onCleared() {
+        super.onCleared()
+        Accelerometer.unregisterSensor()
+        Accelerometer.cancelChannel()
     }
 
 }

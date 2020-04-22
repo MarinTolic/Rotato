@@ -6,19 +6,20 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import hr.johndoeveloper.rotationapp.app.RotationApp
-import hr.johndoeveloper.rotationapp.interactiveFlow.InteractiveFlow
-
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.receiveAsFlow
 
 object Accelerometer : SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
     private var sensor: Sensor? = null
-    val interactiveFlow: InteractiveFlow<FloatArray> = InteractiveFlow()
-    val interactiveFlowTwo: InteractiveFlow<FloatArray> = InteractiveFlow()
+    @ExperimentalCoroutinesApi
+    val broadcastChannel = BroadcastChannel<FloatArray>(10)
 
     fun registerSensor() {
         sensorManager =
-            RotationApp.getAppContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+            RotationApp.getAppContext()?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         sensorManager.registerListener(this, sensor, 16)
     }
@@ -27,12 +28,24 @@ object Accelerometer : SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, p1: Int) {}
+    @ExperimentalCoroutinesApi
+    fun cancelChannel(){
+        broadcastChannel.cancel()
+    }
 
+    @ExperimentalCoroutinesApi
+    fun receiveFlow() = broadcastChannel.
+        openSubscription()
+        .receiveAsFlow()
+
+    override fun onAccuracyChanged(sensor: Sensor?, p1: Int) {
+        /** To be fully honest I still don't have a use case for this **/
+    }
+
+    @ExperimentalCoroutinesApi
     override fun onSensorChanged(sensorEvent: SensorEvent?) {
         sensorEvent?.let {
-            interactiveFlow.postValue(sensorEvent.values)
-            interactiveFlowTwo.postValue(sensorEvent.values)
+            broadcastChannel.offer(sensorEvent.values)
         }
     }
 }
