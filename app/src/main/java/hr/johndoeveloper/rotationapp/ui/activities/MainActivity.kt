@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.TextViewCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import hr.johndoeveloper.rotationapp.MainActivityViewModel
+import hr.johndoeveloper.rotationapp.viewmodel.MainActivityViewModel
 import hr.johndoeveloper.rotationapp.R
 import hr.johndoeveloper.rotationapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindData(): View {
         val binder: ActivityMainBinding =
-            DataBindingUtil.setContentView(this,
+            DataBindingUtil.setContentView(
+                this,
                 R.layout.activity_main
             )
         binder.viewModel = mainActivityViewModel
@@ -50,4 +52,5 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         mainActivityViewModel.stopAccelerometer()
     }
+
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="hr.johndoeveloper.rotationapp.MainActivityViewModel" />
+            type="hr.johndoeveloper.rotationapp.viewmodel.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,12 +25,12 @@
             android:layout_marginBottom="6dp"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:text="@{viewModel.accelerometerLiveData.resultantVector}"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@+id/imageViewDivLine"
             app:layout_constraintDimensionRatio="W,1:2"
             app:layout_constraintEnd_toEndOf="@+id/imageViewDivLine"
-            app:layout_constraintStart_toStartOf="@+id/imageViewDivLine" />
+            app:layout_constraintStart_toStartOf="@+id/imageViewDivLine"
+            android:text="@{viewModel.accelerometerLiveData.resultantVectorString}"/>
 
         <ImageView
             android:id="@+id/imageViewDivLine"
@@ -64,7 +64,8 @@
                 android:id="@+id/rotationIndicatorXAxis"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:arcSweepAngle="@{viewModel.accelerometerLiveData.sweepAngleX}" />
+                app:arcSweepAngle="@{viewModel.accelerometerLiveData.axisValues[0]}"
+              />
 
             <TextView
                 android:id="@+id/textViewX"
@@ -92,7 +93,7 @@
                 android:id="@+id/rotationIndicatorYAxis"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:arcSweepAngle="@{viewModel.accelerometerLiveData.sweepAngleY}"/>
+                app:arcSweepAngle="@{viewModel.accelerometerLiveData.axisValues[1]}"/>
 
             <TextView
                 android:id="@+id/textViewY"
@@ -120,7 +121,7 @@
                 android:id="@+id/rotationIndicatorZAxis"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:arcSweepAngle="@{viewModel.accelerometerLiveData.sweepAngleZ}"/>
+                app:arcSweepAngle="@{viewModel.accelerometerLiveData.axisValues[2]}"/>
 
             <TextView
                 android:id="@+id/textViewZ"
@@ -135,11 +136,11 @@
             style="@style/rotationIndicatorsReading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.accelerometerLiveData.xAxis.toString()}"
             app:layout_constraintBottom_toBottomOf="@+id/textViewYAxis"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutXAxis"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutXAxis"
-            app:layout_constraintTop_toTopOf="@+id/textViewYAxis" />
+            app:layout_constraintTop_toTopOf="@+id/textViewYAxis"
+            android:text="@{viewModel.accelerometerLiveData.axisValueText[0]}"/>
 
         <TextView
             android:id="@+id/textViewYAxis"
@@ -147,21 +148,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{viewModel.accelerometerLiveData.yAxis.toString()}"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutYAxis"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutYAxis"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutYAxis" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutYAxis"
+            android:text="@{viewModel.accelerometerLiveData.axisValueText[1]}"/>
 
         <TextView
             android:id="@+id/textViewZAxis"
             style="@style/rotationIndicatorsReading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.accelerometerLiveData.zAxis.toString()}"
             app:layout_constraintBottom_toBottomOf="@+id/textViewYAxis"
             app:layout_constraintEnd_toEndOf="@+id/linearLayoutZAxis"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutZAxis"
-            app:layout_constraintTop_toTopOf="@+id/textViewYAxis" />
+            app:layout_constraintTop_toTopOf="@+id/textViewYAxis"
+            android:text="@{viewModel.accelerometerLiveData.axisValueText[2]}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
