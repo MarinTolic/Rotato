@@ -1,3 +1,3 @@
 package hr.johndoeveloper.rotationapp.common
 
-const val standardAcceleration = 9.80665
+const val standardAcceleration: Double = 9.80665
